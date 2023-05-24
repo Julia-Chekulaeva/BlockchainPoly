@@ -3,7 +3,6 @@ package blockchain
 import endZeros
 import java.io.File
 import java.security.MessageDigest
-import kotlin.random.Random
 
 abstract class Node(
     private val dataLen: Int, private val type: BlockTypes, private val file: File
@@ -58,7 +57,7 @@ abstract class Node(
     }
 
     private fun resetNonceIndexPrevHashAndData() {
-        lastBlock = getBlockFromText(getTextFromFile(file))
+        lastBlock = getBlockFromText(getTextFromFile())
         nonce = 0
         index = getNextIndex()
         prevHash = getPrevHash()
@@ -69,7 +68,7 @@ abstract class Node(
         if (lastBlock != null)
             resetNonceIndexPrevHashAndData()
         val nextBlock = Block(index, prevHash, calcHash(index, prevHash, data), data, nonce, type)
-        if (nextBlock.getIndex() == getBlockFromText(getTextFromFile(file)).getIndex()) {
+        if (nextBlock.getIndex() == getBlockFromText(getTextFromFile()).getIndex()) {
             try {
                 file.writeText(nextBlock.toString())
                 println(nextBlock.toString())
@@ -79,13 +78,12 @@ abstract class Node(
         }
     }
 
-    private fun getTextFromFile(file: File): String {
+    private fun getTextFromFile(): String {
         var text: String? = null
         while (text == null) {
             try {
                 text = file.readText()
             } catch (e: Exception) {
-                Thread.sleep(Random(1000L).nextLong())
                 continue
             }
         }

@@ -13,11 +13,23 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-network:2.2.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.5")
     testImplementation(kotlin("test"))
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set("MainKt")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = application.mainClass
+    }
 }
 
 tasks.withType<KotlinCompile> {
