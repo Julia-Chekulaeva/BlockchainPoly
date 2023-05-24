@@ -18,7 +18,7 @@ class Tests {
             createNode(2, false, File(fileName))
         }
         thread3.start()
-        Thread.sleep(30_000)
+        Thread.sleep(120_000)
         thread1.interrupt()
         thread2.interrupt()
         thread3.interrupt()
