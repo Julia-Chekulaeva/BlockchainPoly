@@ -5,18 +5,22 @@ class Tests {
 
     @Test
     fun testNodes() {
-        val fileName = "src/test/resources/lastBlock.txt"
+        val files = listOf(
+            "src/test/resources/lastBlock1.txt",
+            "src/test/resources/lastBlock2.txt",
+            "src/test/resources/lastBlock3.txt"
+        ).map { File(it) }
         val thread1 = Thread {
-            createNode(1, true, File(fileName))
+            createNode(1, false, files)
+        }
+        val thread2 = Thread {
+            createNode(2, false, files)
+        }
+        val thread3 = Thread {
+            createNode(2, true, files)
         }
         thread1.start()
-        val thread2 = Thread {
-            createNode(2, false, File(fileName))
-        }
         thread2.start()
-        val thread3 = Thread {
-            createNode(2, false, File(fileName))
-        }
         thread3.start()
         Thread.sleep(120_000)
         thread1.interrupt()

@@ -5,8 +5,8 @@ services:
     environment:
       GENESIS_NODE:
         1
-      FILE:
-        "src/test/resources/lastBlock.txt"
+      FILES:
+        "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
     entrypoint: java -jar ./app/blockchain-all.jar
@@ -16,8 +16,8 @@ services:
     environment:
       GENESIS_NODE:
         1
-      FILE:
-        "src/test/resources/lastBlock.txt"
+      FILES:
+        "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
     entrypoint: java -jar ./app/blockchain-all.jar
@@ -27,8 +27,8 @@ services:
     environment:
       GENESIS_NODE:
         1
-      FILE:
-        "src/test/resources/lastBlock.txt"
+      FILES:
+        "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
     entrypoint: java -jar ./app/blockchain-all.jar

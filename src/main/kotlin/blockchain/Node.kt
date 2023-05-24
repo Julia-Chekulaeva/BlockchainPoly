@@ -4,18 +4,14 @@ import endZeros
 import java.io.File
 import java.security.MessageDigest
 
+const val nodesCount = 3
+
 abstract class Node(
-    private val dataLen: Int, private val type: BlockTypes, private val file: File
+    private val dataLen: Int, private val type: BlockTypes, private val files: List<File>
 ) {
     private var lastBlock: Block? = null
 
     protected var nonce = 0
-
-    private var index = getNextIndex()
-
-    private var prevHash = getPrevHash()
-
-    private var data = generateData()
 
     abstract fun changeNonce()
 
@@ -57,23 +53,30 @@ abstract class Node(
     }
 
     private fun resetNonceIndexPrevHashAndData() {
-        lastBlock = getBlockFromText(getTextFromFile())
+        val lastBlocks = List(nodesCount) { getBlockFromFile() }
+        lastBlock = lastBlocks.maxBy { it.getIndex() }
         nonce = 0
-        index = getNextIndex()
-        prevHash = getPrevHash()
-        data = generateData()
     }
 
-    private fun createNextBlock() {
-        if (lastBlock != null)
+    private fun createNextBlock(isNotFirstBlock: Boolean) {
+        if (isNotFirstBlock)
             resetNonceIndexPrevHashAndData()
+        val index = getNextIndex()
+        val prevHash = getPrevHash()
+        val data = generateData()
         val nextBlock = Block(index, prevHash, calcHash(index, prevHash, data), data, nonce, type)
-        if (nextBlock.getIndex() == getBlockFromText(getTextFromFile()).getIndex()) {
-            try {
-                file.writeText(nextBlock.toString())
-                println(nextBlock.toString())
-            } catch (e: Exception) {
-                println("Error while writing file")
+        if (isNotFirstBlock)
+            resetNonceIndexPrevHashAndData()
+        if (index == nextBlock.getIndex()) {
+            println("Creating new node")
+            loop@while (true) {
+                try {
+                    files[type.i].writeText(nextBlock.toString())
+                    println(nextBlock.toString())
+                    break@loop
+                } catch (e: Exception) {
+                    System.err.println("Error while writing file")
+                }
             }
         }
     }
@@ -82,7 +85,7 @@ abstract class Node(
         var text: String? = null
         while (text == null) {
             try {
-                text = file.readText()
+                text = files[type.i].readText()
             } catch (e: Exception) {
                 continue
             }
@@ -90,8 +93,9 @@ abstract class Node(
         return text
     }
 
-    private fun getBlockFromText(text: String): Block {
-        val split = text.split(Regex("\\s+,\\s+")).map { it.split(Regex("\\s+=\\s+")) }
+    private fun getBlockFromFile(): Block {
+        val text = getTextFromFile()
+        val split = text.split(Regex("\\s*,\\s*")).map { it.split(Regex("\\s*=\\s*")) }
         val index = (split.find { it[0] == "Index" } ?: arrayListOf())[1].toInt()
         val prevHash = (split.find { it[0] == "previous_hash" } ?: arrayListOf())[1]
         val hash = (split.find { it[0] == "hash" } ?: arrayListOf())[1]
@@ -103,12 +107,12 @@ abstract class Node(
 
     fun createFirstBlock() {
         assert(lastBlock == null)
-        createNextBlock()
+        createNextBlock(false)
     }
 
     fun createBlocks() {
         while (true) {
-            createNextBlock()
+            createNextBlock(true)
         }
     }
 }

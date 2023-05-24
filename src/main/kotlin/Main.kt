@@ -9,11 +9,11 @@ import java.io.File
 const val endZeros = "0000"
 const val dataLen = 256
 
-fun createNode(nodeType: Int, isGenesis: Boolean, file: File) {
+fun createNode(nodeType: Int, isGenesis: Boolean, files: List<File>) {
     val node = when (nodeType) {
-        1 -> Node1(dataLen, file)
-        2 -> Node2(dataLen, file)
-        3 -> Node3(dataLen, file)
+        1 -> Node1(dataLen, files)
+        2 -> Node2(dataLen, files)
+        3 -> Node3(dataLen, files)
         else -> throw Exception("Illegal node type")
     }
     if (isGenesis) {
@@ -28,7 +28,7 @@ fun main(args: Array<String>) {
         .option(ArgType.Int, fullName = "node-type", shortName = "n", description = "node type")
         .required()
     val isGenesis = System.getenv("GENESIS_NODE").toInt() == nodeType
-    val file = File(System.getenv("FILE"))
+    val files = System.getenv("FILES").split(";").map { File(it) }
     argParser.parse(args)
-    createNode(nodeType, isGenesis, file)
+    createNode(nodeType, isGenesis, files)
 }
