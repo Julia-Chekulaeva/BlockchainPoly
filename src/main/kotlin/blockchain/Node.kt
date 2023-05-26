@@ -71,11 +71,11 @@ abstract class Node(
             println("Creating new node")
             loop@while (true) {
                 try {
-                    files[type.i].writeText(nextBlock.toString())
+                    files[type.i - 1].writeText(nextBlock.toString())
                     println(nextBlock.toString())
                     break@loop
                 } catch (e: Exception) {
-                    System.err.println("Error while writing file")
+                    System.err.println("Error while writing file: ${e.message}")
                 }
             }
         }
@@ -85,7 +85,7 @@ abstract class Node(
         var text: String? = null
         while (text == null) {
             try {
-                text = files[type.i].readText()
+                text = files[type.i - 1].readText()
             } catch (e: Exception) {
                 continue
             }
