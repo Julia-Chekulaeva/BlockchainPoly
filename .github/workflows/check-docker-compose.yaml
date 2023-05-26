@@ -1,0 +1,19 @@
+name: check-docker-compose-task
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+  workflow_dispatch:
+
+
+jobs:
+  Check-Docker-Compose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@HEAD
+      - run: docker compose build
+      - run: docker-compose up
+      - run: sleep 30
+      - run: docker-compose down

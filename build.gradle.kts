@@ -30,6 +30,9 @@ tasks.jar {
     manifest {
         attributes["Main-Class"] = application.mainClass
     }
+    from(configurations.runtimeOnlyDependenciesMetadata.get().files.map {
+        if (it.isDirectory) it else zipTree(it.name)
+    })
 }
 
 tasks.withType<KotlinCompile> {
