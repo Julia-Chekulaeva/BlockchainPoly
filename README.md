@@ -9,4 +9,5 @@ docker-compose up
 docker-compose down
 ```
 ### Testing results
-![](.src/test/resources/run_tests.PNG)
+
+![](src/test/resources/run_tests.PNG)
