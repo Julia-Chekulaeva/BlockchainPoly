@@ -3,30 +3,36 @@ version: "3"
 services:
   node1:
     environment:
+      NODE_TYPE:
+        1
       GENESIS_NODE:
         1
       FILES:
-        "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
+        src/test/resources/lastBlock1.txt,src/test/resources/lastBlock2.txt,src/test/resources/lastBlock3.txt
     build:
       context: .
-    command: --type 1
+    command: ""
 
   node2:
     environment:
+      NODE_TYPE:
+        2
       GENESIS_NODE:
         1
       FILES:
-        "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
+        src/test/resources/lastBlock1.txt,src/test/resources/lastBlock2.txt,src/test/resources/lastBlock3.txt
     build:
       context: .
-    command: --type 2
+    command: ""
 
   node3:
     environment:
+      NODE_TYPE:
+        3
       GENESIS_NODE:
         1
       FILES:
-        "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
+        src/test/resources/lastBlock1.txt,src/test/resources/lastBlock2.txt,src/test/resources/lastBlock3.txt
     build:
       context: .
-    command: --type 3
+    command: ""

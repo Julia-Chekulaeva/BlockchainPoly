@@ -1,9 +1,6 @@
 import blockchain.Node1
 import blockchain.Node2
 import blockchain.Node3
-import kotlinx.cli.ArgParser
-import kotlinx.cli.ArgType
-import kotlinx.cli.required
 import java.io.File
 
 const val endZeros = "0000"
@@ -22,13 +19,9 @@ fun createNode(nodeType: Int, isGenesis: Boolean, files: List<File>) {
     node.createBlocks()
 }
 
-fun main(args: Array<String>) {
-    val argParser = ArgParser("blockchain arguments parser")
-    val nodeType by argParser
-        .option(ArgType.Int, fullName = "type", shortName = "t", description = "node type")
-        .required()
-    val isGenesis = System.getenv("GENESIS_NODE").toInt() == nodeType
-    val files = System.getenv("FILES").split(";").map { File(it) }
-    argParser.parse(args)
-    createNode(nodeType, isGenesis, files)
+fun main() {
+    val nodeType = System.getenv("NODE_TYPE")
+    val isGenesis = System.getenv("GENESIS_NODE") == nodeType
+    val files = System.getenv("FILES").split(",").map { File(it) }
+    createNode(nodeType.toInt(), isGenesis, files)
 }
