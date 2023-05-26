@@ -19,7 +19,7 @@ services:
         "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
-    command: --type 1
+    command: --type 2
 
   node3:
     environment:
@@ -29,4 +29,4 @@ services:
         "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
-    command: --type 1
+    command: --type 3
