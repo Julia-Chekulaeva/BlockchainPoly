@@ -17,7 +17,7 @@ class Tests {
             createNode(2, false, files)
         }
         val thread3 = Thread {
-            createNode(2, true, files)
+            createNode(3, true, files)
         }
         thread1.start()
         thread2.start()
@@ -26,5 +26,8 @@ class Tests {
         thread1.interrupt()
         thread2.interrupt()
         thread3.interrupt()
+        files.forEach {
+            it.deleteOnExit()
+        }
     }
 }

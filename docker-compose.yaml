@@ -9,7 +9,6 @@ services:
         "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
-    entrypoint: java -jar ./app/blockchain-all.jar
     command: --type 1
 
   node2:
@@ -20,8 +19,7 @@ services:
         "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
-    entrypoint: java -jar ./app/blockchain-all.jar
-    command: --type 1
+    command: --type 2
 
   node3:
     environment:
@@ -31,5 +29,4 @@ services:
         "src/test/resources/lastBlock1.txt;src/test/resources/lastBlock2.txt;src/test/resources/lastBlock2.txt"
     build:
       context: .
-    entrypoint: java -jar ./app/blockchain-all.jar
-    command: --type 1
+    command: --type 3

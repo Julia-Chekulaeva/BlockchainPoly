@@ -9,4 +9,11 @@ docker-compose up
 docker-compose down
 ```
 ### Testing results
-![](.src/test/resources/run_tests.PNG)
+
+[![run-tests-task](https://github.com/Julia-Chekulaeva/BlockchainPoly/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/Julia-Chekulaeva/BlockchainPoly/actions/workflows/run-tests.yaml)
+
+![](src/test/resources/run_tests.PNG)
+
+### Test docker-compose
+
+[![run-tests-task](https://github.com/Julia-Chekulaeva/BlockchainPoly/actions/workflows/run-tests.yaml/badge.svg)](https://github.com/Julia-Chekulaeva/BlockchainPoly/actions/workflows/run-tests.yaml)
