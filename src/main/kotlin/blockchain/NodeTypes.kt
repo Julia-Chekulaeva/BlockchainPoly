@@ -4,16 +4,16 @@ import java.io.File
 import java.util.*
 
 class Node1(
-    dataLen: Int, file: File
-) : Node(dataLen, BlockTypes.BLOCK1, file) {
+    dataLen: Int, files: List<File>
+) : Node(dataLen, BlockTypes.BLOCK1, files) {
     override fun changeNonce() {
         nonce = Random().nextInt()
     }
 }
 
 class Node2(
-    dataLen: Int, file: File
-) : Node(dataLen, BlockTypes.BLOCK2, file) {
+    dataLen: Int, files: List<File>
+) : Node(dataLen, BlockTypes.BLOCK2, files) {
 
     private var diff: Int = 0
 
@@ -24,8 +24,8 @@ class Node2(
 }
 
 class Node3(
-    dataLen: Int, file: File
-) : Node(dataLen, BlockTypes.BLOCK3, file) {
+    dataLen: Int, files: List<File>
+) : Node(dataLen, BlockTypes.BLOCK3, files) {
 
     private var diff: Int = 0
 
