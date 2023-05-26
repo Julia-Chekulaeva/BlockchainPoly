@@ -26,5 +26,8 @@ class Tests {
         thread1.interrupt()
         thread2.interrupt()
         thread3.interrupt()
+        files.forEach {
+            it.deleteOnExit()
+        }
     }
 }
