@@ -13,8 +13,6 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-network:2.2.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.5")
     testImplementation(kotlin("test"))
 }
 
