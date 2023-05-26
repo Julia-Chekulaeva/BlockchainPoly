@@ -1,4 +1,4 @@
-name: check-docker-task
+name: run-tests-task
 on:
   push:
     branches: [ "main", "develop" ]

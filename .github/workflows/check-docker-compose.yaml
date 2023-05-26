@@ -1,4 +1,4 @@
-name: check-docker-task
+name: check-docker-compose-task
 on:
   push:
     branches: [ "main", "develop" ]
