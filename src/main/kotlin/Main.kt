@@ -25,7 +25,7 @@ fun createNode(nodeType: Int, isGenesis: Boolean, files: List<File>) {
 fun main(args: Array<String>) {
     val argParser = ArgParser("blockchain arguments parser")
     val nodeType by argParser
-        .option(ArgType.Int, fullName = "node-type", shortName = "n", description = "node type")
+        .option(ArgType.Int, fullName = "type", shortName = "t", description = "node type")
         .required()
     val isGenesis = System.getenv("GENESIS_NODE").toInt() == nodeType
     val files = System.getenv("FILES").split(";").map { File(it) }

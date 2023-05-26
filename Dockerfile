@@ -9,4 +9,5 @@ RUN gradle build
 FROM eclipse-temurin:17-jdk-alpine as blockchain-run
 VOLUME /app
 
-COPY --from=build /app/build/libs/blockchain.jar ./app/
+COPY --from=build /app/build/libs/BlockchainPoly-1.0-SNAPSHOT.jar ./app/
+ENTRYPOINT java --jar ./app/BlockchainPoly-1.0-SNAPSHOT.jar

@@ -1,0 +1,15 @@
+name: check-docker-task
+on:
+  push:
+  pull_request:
+    branches: "main"
+  workflow_dispatch:
+
+
+jobs:
+  Build-Docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@HEAD
+      - run: docker compose build
