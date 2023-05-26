@@ -8,11 +8,13 @@ on:
 
 
 jobs:
-  Build-Docker:
+  Run-Tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@HEAD
-      - run: gradle build
-      - run: gradle test
-      - run: sleep 30
+      - name: Test with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test -i
+          gradle-version: 7.4.2
